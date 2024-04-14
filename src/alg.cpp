@@ -18,18 +18,15 @@ std::string infx2pstfx(std::string inf) {
     for (char c : inf) {
         if (isdigit(c)) {
             postfix = postfix + c + ' ';
-        }
-        else if (c == '(') {
+        } else if (c == '(') {
             stack.push(c);
-        }
-        else if (ProverkaNaOperator(c)) {
+        } else if (ProverkaNaOperator(c)) {
             while (!stack.isEmpty() && GetPrior(stack.get()) >= GetPrior(c)) {
                 postfix = postfix + stack.get() + ' ';
                 stack.pop();
             }
             stack.push(c);
-        }
-        else if (c == ')') {
+        } else if (c == ')') {
             while (!stack.isEmpty() && stack.get() != '(') {
                 postfix = postfix + stack.get() + ' ';
                 stack.pop();
@@ -52,8 +49,7 @@ int eval(std::string post) {
     for (char c : post) {
         if (isdigit(c)) {
             Number += c;
-        }
-        else if (Number != "") {
+        } else if (Number != "") {
             stack.push(std::atoi(Number.c_str()));
             Number = "";
         }
@@ -63,18 +59,18 @@ int eval(std::string post) {
             int op1 = stack.get();
             stack.pop();
             switch (c) {
-            case '+':
-                stack.push(op1 + op2);
-                break;
-            case '-':
-                stack.push(op1 - op2);
-                break;
-            case '*':
-                stack.push(op1 * op2);
-                break;
-            case '/':
-                stack.push(op1 / op2);
-                break;
+                case '+':
+                    stack.push(op1 + op2);
+                    break;
+                case '-':
+                    stack.push(op1 - op2);
+                    break;
+                case '*':
+                    stack.push(op1 * op2);
+                    break;
+                case '/':
+                    stack.push(op1 / op2);
+                    break;
             }
         }
     }
